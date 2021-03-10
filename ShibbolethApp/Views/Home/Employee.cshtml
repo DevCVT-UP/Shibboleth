@@ -1,0 +1,19 @@
+﻿@using ShibbolethLogin;
+@{
+    ViewData["Title"] = "Zaměstnanci";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Stránka pouze pro přihlášené s rolí zaměstnanec!</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        Role:
+        @{
+            var roles = User.Identity.GetRoles();
+            <strong>@(string.Join(", ", roles))</strong>
+        }
+
+    </div>
+}

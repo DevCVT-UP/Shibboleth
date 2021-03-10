@@ -1,0 +1,11 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Claimy";
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+}
+<h1>@ViewData["Title"]</h1>
+
+@foreach(var c in claimsIdentity.Claims)
+{
+    <p>@c.Type - @c.Value</p>
+}

@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Name": "superadmin",
+    "Users": ["babuto00", "ketnda00", "vesefr00", "tesarikj"],
+    "ADGroups": [ ],
+    "ChildRoles": [ ]
+  },
+  {
+    "Name": "employee",
+    "Users": [],
+    "ADGroups": [ "zamestnanec" ],
+    "ChildRoles": [ ]
+  },
+  {
+    "Name": "student",
+    "Users": [ ],
+    "ADGroups": [ "student" ],
+    "ChildRoles": [ ]
+  }
+]

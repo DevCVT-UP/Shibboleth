@@ -1,0 +1,30 @@
+﻿@using System.Security.Claims;
+@using ShibbolethLogin;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div>Pro zobrazení rolí a hlavičky se přihlaste.</div>
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        Role:
+        @{
+            var roles = User.Identity.GetRoles();
+            <strong>@(string.Join(", ", roles))</strong>
+        }
+
+    </div>
+    <hr />
+    <div>
+        @foreach (var a in Context.Request.Headers)
+        {
+            <p>@a.Key: @a.Value</p>
+        }
+    </div>
+}
