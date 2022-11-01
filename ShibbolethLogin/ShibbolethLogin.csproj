@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageOutputPath>../packages</PackageOutputPath>
+    <Authors>Palacký University Olomouc</Authors>
+    <Description>Shibboleth login library.</Description>
+    <Version>1.0.0</Version>
+    <Copyright>Copyright 2021 © Palacký University Olomouc. All rights reserved.</Copyright>
+
+    <LangVersion>9</LangVersion>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="nupkg\**" />
+    <EmbeddedResource Remove="nupkg\**" />
+    <None Remove="nupkg\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+  </ItemGroup>
+
+</Project>

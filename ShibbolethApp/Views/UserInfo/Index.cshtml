@@ -1,0 +1,9 @@
+﻿@inject ShibbolethLogin.IServiceContext serviceContext
+@{
+    ViewData["Title"] = "Uživatelské údaje";
+}
+<h2>@ViewData["Title"]</h2>
+
+<p>Uživatelské jméno: @serviceContext.UserId</p>
+<p>Uživatelské jméno s doménou: @serviceContext.UserIdWithDomain</p>
+<p>IP adresa: @serviceContext.IpAddress</p>

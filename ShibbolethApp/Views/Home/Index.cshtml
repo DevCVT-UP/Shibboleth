@@ -1,0 +1,32 @@
+﻿@using ShibbolethLogin;
+@using ShibbolethLogin.Claims
+@{
+    ViewData["Title"] = "Hlavní stránka";
+    ViewData["Container"] = "container";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div>Pro zobrazení rolí a hlavičky se přihlaste.</div>
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h2>Role:</h2>
+        @{
+            var roles = User.Identity.GetRoles();
+            <strong>@(string.Join(", ", roles))</strong>
+        }
+
+    </div>
+    <hr />
+    <div style="word-wrap: break-word;">
+        <h2>Hlavičky:</h2>
+        @foreach (var a in Context.Request.Headers)
+        {
+            <p>@a.Key: @a.Value</p>
+        }
+    </div>
+}

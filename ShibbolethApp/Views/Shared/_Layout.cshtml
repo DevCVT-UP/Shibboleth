@@ -1,0 +1,126 @@
+﻿@using System.Security.Claims;
+@using ShibbolethLogin;
+@using ShibbolethLogin.Claims
+@{ 
+    var container = ViewData["Container"] != null ? ViewData["Container"] : "container";
+}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <partial name="_Icons" />
+    <title>Shibboleth - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/dist/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-upol border-bottom box-shadow mb-3">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home" aria-label="Index">
+                <img src="@Url.Content("~/images/UP_logo_cs.png")" height="100" alt="logo" />
+            </a>
+
+            <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto ml-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Domů</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Claims">Claimy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="UserInfo" asp-action="Index">Uživatelské údaje</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Authorize">Autorizace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Student">Studenti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Employee">Zaměstnanci</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="StudentOrEmployee">Studenti nebo zaměstnanci</a>
+                    </li>
+
+                </ul>
+
+                <ul class="navbar-nav ml-auto pl-2 pr-3">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var name = User.Identity.GetClaimByType(ClaimTypes.GivenName);
+                        name = !string.IsNullOrEmpty(name) ? name : User.Identity.Name;
+                        <li class="nav-item">
+                            <a class="nav-link text-white">Přihlášen: @name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="LogOff">Odhlásit</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="LogIn">Přihlásit</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="@container mt-3 mb-3 content" id="main-container">
+        <main role="main" id="main-div" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted" style="bottom: 0!important;">
+        <div class="footer-wrapper">
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <img src="@Url.Content("~/images/UP_logo_horizont_cerna_cs.png")" height="100" alt="footer logo" />
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="pt-3">
+                            <strong>
+                                <a href="https://upol.cz/" target="_blank" class="text-dark" aria-label="Univerzita Palackého v Olomouci">
+                                    Univerzita Palackého v Olomouci
+                                </a><br /><br />
+                                <a href="https://cvt.upol.cz/" target="_blank" class="text-dark" aria-label="Centrum výpočetní techniky">
+                                    Centrum výpočetní techniky
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="pt-3">
+                            <a href="https://www.facebook.com/itupol.cz/" target="_blank" style="text-decoration: none;" aria-label="facebook">
+                                <img src="@Url.Content("~/images/footer_facebook.png")" alt="facebook" />
+                            </a>
+                            <a href="https://twitter.com/itupol" target="_blank" style="text-decoration: none;" class="ml-2" aria-label="twitter">
+                                <img src="@Url.Content("~/images/footer_twitter.png")" alt="twitter" />
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
